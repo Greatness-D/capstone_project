@@ -22,14 +22,4 @@ class Movie(Base):
 
     user = relationship("User", back_populates="movies")
     ratings = relationship("Rating", back_populates="movie")
-    # comments = relationship("Comment", back_populates="movie")
-
-class Rating(Base):
-    __tablename__ = "ratings"
-    id = Column(Integer, primary_key=True, index=True)
-    movie_id = Column(Integer, ForeignKey("movies.id"))
-    user_id = Column(Integer, ForeignKey("users.id"))
-    rating = Column(Float)
-
-    movie = relationship("Movie", back_populates="ratings")
-    user = relationship("User", back_populates="ratings")
+    # comments = relationship("Comment", back_populates="movie"
