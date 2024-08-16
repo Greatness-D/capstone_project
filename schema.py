@@ -34,4 +34,5 @@ class Movie(MovieBase):
   id: int
   user_id: int
 
-  class Config:
+ class Config:
+  orm_mode = True

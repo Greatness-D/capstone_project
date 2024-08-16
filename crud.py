@@ -52,37 +52,7 @@ def update_movie( db: Session, movie: schema.MovieUpdate, user_id: int = None):
     db.refresh(db_movie)
     return db_movie
 
-def delete_movie(db: Session, movie_id: int, user_id: int):
-    db_movie = db.query(models.Movie).filter(models.Movie.id == movie_id).first()
-    
-    if db_movie is None:
-        raise HTTPException(status_code="Not Found", detail="Movie not found")
-    if db_movie.user_id != user_id:
-        raise HTTPException(status_code="Not Found", detail="You are not authorized to delete this movie")
-    db.delete(db_movie)
-    db.commit()
-    return {"message": "Movie successfully deleted"}
 
-
-
-
-def create_comment(db: Session, comment: schema.CommentCreate, user_id: int):
-    db_comment = models.Comment(
-        content=comment.content,
-        movie_id=comment.movie_id,
-        user_id=user_id,
-        parent_comment_id=comment.parent_comment_id,
-    )
-    db.add(db_comment)
-    db.commit()
-    db.refresh(db_comment)
-    return db_comment
-
-def get_comments_by_movie(db: Session, movie_id: int):
-    return db.query(models.Comment).filter(models.Comment.movie_id == movie_id).all()
-
-def get_comment_replies(db: Session, comment_id: int):
-    return db.query(models.Comment).filter(models.Comment.parent_comment_id == comment_id).all()
 
 
 

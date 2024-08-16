@@ -32,8 +32,3 @@ def update_movie(movie: schema.MovieUpdate, db: Session = Depends(get_db), curre
     if db_movie is None:
         raise HTTPException(status_code=404, detail="Movie not found")
     return {'message': 'success', 'data': db_movie}
-
-@router.delete("/movies/{movie_id}")
-def delete_movie(movie_id: int, db: Session = Depends(get_db), current_user: schema.User = Depends(get_current_user)):
-    result = crud.delete_movie(db=db, movie_id=movie_id, user_id=current_user.id)
-    return result
