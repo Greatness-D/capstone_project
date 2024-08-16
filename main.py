@@ -3,7 +3,7 @@ from sqlalchemy.orm import Session
 
 import crud, models, schema, auth
 from database import SessionLocal, engine, Base, get_db
-from router import auth, movies, comments, ratings
+from router import auth, movies, 
 
 
 
